@@ -3,7 +3,7 @@ import java.util.*;
 public class Main {
 
     public static void main(String[] args) {
-        Deque<Person> attraction = new ArrayDeque<>();
+        Queue<Person> attraction = new LinkedList<>();
         for (Person p : generateClients()) {
             attraction.offer(p);
         }
