@@ -3,10 +3,8 @@ import java.util.*;
 public class Main {
 
     public static void main(String[] args) {
-        Queue<Person> attraction = new LinkedList<>();
-        for (Person p : generateClients()) {
-            attraction.offer(p);
-        }
+        Queue<Person> attraction = new LinkedList<>(generateClients());
+
         System.out.println(attraction + "\n");
 
         while (!attraction.isEmpty()) {
