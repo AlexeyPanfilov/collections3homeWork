@@ -3,29 +3,25 @@ import java.util.*;
 public class Main {
 
     public static void main(String[] args) {
-        Queue<Person> attraction = new LinkedList<>();
+        Deque<Person> attraction = new ArrayDeque<>();
         for (Person p : generateClients()) {
             attraction.offer(p);
         }
-        System.out.println(attraction);
+        System.out.println(attraction + "\n");
 
         while (!attraction.isEmpty()) {
-            Iterator<Person> iterator = attraction.iterator();
-            while (iterator.hasNext()) {
-               Person p = iterator.next();
-               p.tickets--;
-               if (p.tickets > 0) System.out.println(p.printPersonalInfo() + " прокатился на аттракционе. " +
-                       "У него осталось " + p.tickets + " билетов.");
-               if (p.tickets == 0) {
-                   System.out.println(p.printPersonalInfo() + " прокатился на паровозике последний раз. " +
-                           "У него больше не осталось билетов.");
-                   iterator.remove();
-               }
-           }
+            attraction.peek().tickets--;
+            Person p = attraction.poll();
+            if (p.tickets > 0) {
+                System.out.println(p.printPersonalInfo() + " прокатился на аттракционе. У него осталось билетов: " + p.tickets);
+                attraction.offer(p);
+            } else if (p.tickets == 0) {
+                System.out.println(p.printPersonalInfo() + " прокатился на аттракционе в последний раз. У него не осталось билетов.");
+            }
         }
     }
 
-    static List<Person> generateClients () {
+    static List<Person> generateClients() {
         Person person1 = new Person("Vasya", "Ivanov", 4);
         Person person2 = new Person("Kolya", "Petrov", 2);
         Person person3 = new Person("Pavel", "Yatsyna", 3);
